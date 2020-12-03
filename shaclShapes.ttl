@@ -1,0 +1,328 @@
+@prefix : <https://w3id.org/geometry/omg-fog#> .
+@prefix bot: <https://w3id.org/bot#> .
+@prefix dot: <https://w3id.org/dot#> .
+@prefix fog: <https://w3id.org/fog#> .
+@prefix omg: <https://w3id.org/omg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#####################################################################################
+## SC-1
+#####################################################################################
+:S1
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A node with an incoming omg:hasGeometry property should have either an outgoing omg:hasSimpleGeometryDescription, omg:hasReferencedGeometryId or an omg:hasComplexGeometryDescription property. Addresses SC-1."@en ;
+  rdfs:label "Geometry shape 1"@en ;
+  sh:message "A node with an incoming omg:hasGeometry property should have either an outgoing omg:hasSimpleGeometryDescription, omg:hasReferencedGeometryId or an omg:hasComplexGeometryDescription property. Addresses SC-1."@en ;
+  sh:targetObjectsOf omg:hasGeometry ;
+  sh:xone (
+      [
+        sh:property [
+            sh:path omg:hasSimpleGeometryDescription ;
+            sh:minCount 1 ;
+          ] ;
+      ]
+      [
+        sh:property [
+            sh:path omg:hasReferencedGeometryId ;
+            sh:minCount 1 ;
+          ] ;
+      ]
+      [
+        sh:property [
+            sh:path omg:hasComplexGeometryDescription ;
+            sh:minCount 1 ;
+          ] ;
+      ]
+    ) ;
+.
+
+:S2
+  rdf:type sh:NodeShape ;
+  rdfs:comment "An omg:hasGeometryState property (used in L3 geometry patterns) should not occur in the dataset. Addresses SC-1."@en ;
+  rdfs:label "Geometry shape 2"@en ;
+  sh:message "An omg:hasGeometryState property (used in L3 geometry patterns) should not occur in the dataset. Addresses SC-1."@en ;
+  sh:not [
+      rdf:type sh:PropertyShape ;
+      sh:path [
+          sh:inversePath omg:hasGeometryState ;
+        ] ;
+      sh:minCount 1 ;
+    ] ;
+  sh:targetObjectsOf omg:hasGeometryState ;
+.
+
+:S3
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A node with an outgoing omg:hasSimpleGeometryDescription property should have an incoming omg:hasGeometry property. Addresses SC-1."@en ;
+  rdfs:label "Geometry shape 3"@en ;
+  sh:property :subShapeS3 ;
+  sh:targetSubjectsOf omg:hasSimpleGeometryDescription ;
+.
+:subShapeS3
+	rdf:type sh:PropertyShape ;
+	sh:path [
+	  sh:inversePath omg:hasGeometry ;
+	] ;
+	sh:message "A node with an outgoing omg:hasSimpleGeometryDescription property should have an incoming omg:hasGeometry property. Addresses SC-1."@en ;
+	rdfs:label "Subshape for S3"@en ;
+	sh:minCount 1 ;
+.
+:S4
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A node with an outgoing omg:hasReferencedGeometryId property should have an incoming omg:hasGeometry property. Addresses SC-1."@en ;
+  rdfs:label "Geometry shape 4"@en ;
+  sh:property :subShapeS4 ;
+  sh:targetSubjectsOf omg:hasReferencedGeometryId ;
+.
+:subShapeS4
+	rdf:type sh:PropertyShape ;
+	sh:path [
+	  sh:inversePath omg:hasGeometry ;
+	] ;
+	sh:message "A node with an outgoing omg:hasReferencedGeometryId property should have an incoming omg:hasGeometry property. Addresses SC-1."@en ;
+	rdfs:label "Subshape for S4"@en ;
+	sh:minCount 1 ;
+.
+:S5
+  rdf:type sh:NodeShape ;
+  rdfs:comment "A node with an outgoing omg:hasComplexGeometryDescription property should have an incoming omg:hasGeometry property. Addresses SC-1."@en ;
+  rdfs:label "Geometry shape 5"@en ;
+  sh:property :subShapeS5 ;
+  sh:targetSubjectsOf omg:hasComplexGeometryDescription ;
+.
+:subShapeS5
+	rdf:type sh:PropertyShape ;
+	sh:path [
+	  sh:inversePath omg:hasGeometry ;
+	] ;
+	sh:message "A node with an outgoing omg:hasComplexGeometryDescription property should have an incoming omg:hasGeometry property. Addresses SC-1."@en ;
+	rdfs:label "Subshape for S5"@en ;
+	sh:minCount 1 ;
+.
+#####################################################################################
+## SC-2
+#####################################################################################
+:S6
+  rdf:type sh:NodeShape ;
+  rdfs:comment "An omg:hasComplexGeometryDescription property (used for approach 1 and 2) should not occur in the dataset. Addresses SC-2."@en ;
+  rdfs:label "Geometry shape 6"@en ;
+  sh:not [
+      rdf:type sh:PropertyShape ;
+      sh:path [
+          sh:inversePath omg:hasComplexGeometryDescription ;
+        ] ;
+      sh:minCount 1 ;
+    ] ;
+  sh:message "An omg:hasComplexGeometryDescription property (used for approach 1 and 2) should not occur in the dataset. Addresses SC-2."@en ;
+  sh:targetObjectsOf omg:hasComplexGeometryDescription ;
+.
+#####################################################################################
+## SC-3
+#####################################################################################
+:S7
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an incoming omg:hasSimpleGeometryDescription property should be an RDF literal. Addresses SC-3."@en ;
+  rdfs:label "Geometry shape 7"@en ;
+  sh:message "The node with an incoming omg:hasSimpleGeometryDescription property should be an RDF literal. Addresses SC-3."@en ;
+  sh:nodeKind sh:Literal ;
+  sh:targetObjectsOf omg:hasSimpleGeometryDescription ;
+.
+:S8
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an incoming omg:hasReferencedGeometryId property should be an RDF literal. Addresses SC-3."@en ;
+  rdfs:label "Geometry shape 8"@en ;
+  sh:message "The node with an incoming omg:hasReferencedGeometryId property should be an RDF literal. Addresses SC-3."@en ;
+  sh:nodeKind sh:Literal ;
+  sh:targetObjectsOf omg:hasReferencedGeometryId ;
+.
+:S9
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an incoming omg:hasSimpleGeometryDescription property should have a valid datatype (xsd:string, xsd:base64Binary, xsd:hexBinary, xsd:anyURI). Custom datatypes for other binary-to-text encoding schemes can be added in the future. Addresses SC-3."@en ;
+  rdfs:label "Geometry shape 9"@en ;
+  sh:message "The node with an incoming omg:hasSimpleGeometryDescription property should have a valid datatype (xsd:string, xsd:base64Binary, xsd:hexBinary, xsd:anyURI). Custom datatypes for other binary-to-text encoding schemes can be added in the future. Addresses SC-3."@en ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype xsd:base64Binary ;
+      ]
+      [
+        sh:datatype xsd:hexBinary ;
+      ]
+      [
+        sh:datatype xsd:anyURI ;
+      ]
+    ) ;
+  sh:targetObjectsOf omg:hasSimpleGeometryDescription ;
+.
+
+:S10
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an incoming omg:hasReferencedGeometryId property should have a valid datatype (xsd:string). Addresses SC-3."@en ;
+  rdfs:label "Geometry shape 10"@en ;
+  sh:message "The node with an incoming omg:hasReferencedGeometryId property should have a valid datatype (xsd:string). Addresses SC-3."@en ;
+  sh:datatype xsd:string ;
+  sh:targetObjectsOf omg:hasReferencedGeometryId ;
+.
+:S11
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an incoming omg:hasComplexGeometryDescription property should be a blank node or an IRI. Addresses SC-3."@en ;
+  rdfs:label "Geometry shape 11"@en ;
+  sh:message "The node with an incoming omg:hasComplexGeometryDescription property should be a blank node or an IRI. Addresses SC-3."@en ;
+  sh:nodeKind sh:BlankNodeOrIRI ;
+  sh:targetObjectsOf omg:hasComplexGeometryDescription ;
+.
+#####################################################################################
+## SC-4
+#####################################################################################
+:S12
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an incoming omg:hasGeometry property should have maximum one incoming omg:hasGeometry property. In other words, a omg:Geometry node cannot be linked from multiple objects. Addresses SC-4."@en ;
+  rdfs:label "Geometry shape 12"@en ;
+  sh:property :subShapeS12 ;
+  sh:targetObjectsOf omg:hasGeometry ;
+.
+:subShapeS12
+	rdf:type sh:PropertyShape ;
+	sh:path [
+	  sh:inversePath omg:hasGeometry ;
+	] ;
+	sh:message "The node with an incoming omg:hasGeometry property should have maximum one incoming omg:hasGeometry property. In other words, a omg:Geometry node cannot be linked from multiple objects. Addresses SC-4."@en ;
+	rdfs:label "Subshape for S12"@en ;
+	sh:maxCount 1 ; 
+.
+#####################################################################################
+## SC-5
+#####################################################################################
+:S13
+  rdf:type sh:NodeShape ;
+  rdfs:comment "An omg:isPartOfGometry property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en ;
+  rdfs:label "Geometry shape 13"@en ;
+  sh:message "An omg:isPartOfGometry property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en ;
+  sh:not [
+      rdf:type sh:PropertyShape ;
+      sh:path omg:isPartOfGeometry ;
+      sh:minCount 1 ;
+    ] ;
+  sh:targetSubjectsOf omg:isPartOfGeometry ;
+.
+:S14
+  rdf:type sh:NodeShape ;
+  rdfs:comment "An omg:hasReferencedGeometryId property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en ;
+  rdfs:label "Geometry shape 14"@en ;
+  sh:message "An omg:hasReferencedGeometryId property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en ;
+  sh:not [
+      rdf:type sh:PropertyShape ;
+      sh:path omg:hasReferencedGeometryId ;
+      sh:minCount 1 ;
+    ] ;
+  sh:targetSubjectsOf omg:hasReferencedGeometryId ;
+.
+#####################################################################################
+## SC-6
+#####################################################################################
+:S15
+  rdf:type sh:PropertyShape ;
+  sh:path omg:hasGeometry ;
+  rdfs:comment "All bot:Element, bot:Zone and dot:Damage instances should have at least one outgoing omg:hasGeometry relation. Addresses SC-6."@en ;
+  rdfs:label "Geometry shape 15"@en ;
+  sh:message "All bot:Element, bot:Zone and dot:Damage instances should have at least one outgoing omg:hasGeometry relation. Addresses SC-6."@en ;
+  sh:minCount 1 ;
+  sh:targetClass bot:Element ;
+  sh:targetClass bot:Zone ;
+  sh:targetClass dot:Damage ;
+.
+#####################################################################################
+## SC-7
+#####################################################################################
+:S16
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an incoming omg:hasSimpleGeometryDescription property should have a datatype equal to xsd:string, xsd:base64Binary or xsd:anyURI. Other binary-to-text encoding schemes are not supported by the application of the receiving stakeholder. Addresses SC-7."@en ;
+  rdfs:label "Geometry shape 16"@en ;
+  sh:message "The node with an incoming omg:hasSimpleGeometryDescription property should have a datatype equal to xsd:string, xsd:base64Binary or xsd:anyURI. Other binary-to-text encoding schemes are not supported by the application of the receiving stakeholder. Addresses SC-7."@en ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype xsd:base64Binary ;
+      ]
+      [
+        sh:datatype xsd:anyURI ;
+      ]
+    ) ;
+  sh:targetObjectsOf omg:hasSimpleGeometryDescription ;
+.
+#####################################################################################
+## SC-8
+#####################################################################################
+:S17
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The node with an outgoing omg:hasSimpleGeometryDescription property should also have a property equal to either fog:asPly_v1.0-binaryLE (binary geometry format), fog:asE57_v1.0 (binary geometry format) or fog:asStep_ap214 (text-based geometry format). Addresses SC-8."@en ;
+  rdfs:label "Geometry shape 17"@en ;
+  sh:message "The node with an outgoing omg:hasSimpleGeometryDescription property should also have a property equal to either fog:asPly_v1.0-binaryLE (binary geometry format), fog:asE57_v1.0 (binary geometry format) or fog:asStep_ap214 (text-based geometry format). Addresses SC-8."@en ;
+  sh:xone (
+      [
+        sh:property [
+            sh:path <https://w3id.org/fog#asPly_v1.0-binaryLE> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+          ] ;
+      ]
+      [
+        sh:property [
+            sh:path <https://w3id.org/fog#asE57_v1.0> ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+          ] ;
+      ]
+      [
+        sh:property [
+            sh:path fog:asStep_ap214 ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+          ] ;
+      ]
+    ) ;
+  sh:targetSubjectsOf omg:hasSimpleGeometryDescription ;
+.
+:S18
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The RDF literal receiving a fog:asPly_v1.0-binaryLE cannot have a xsd:string literal. Addresses SC-8."@en ;
+  rdfs:label "Geometry shape 18"@en ;
+  sh:message "The RDF literal receiving a fog:asPly_v1.0-binaryLE cannot have a xsd:string literal. Addresses SC-8."@en ;
+  sh:not [
+      sh:datatype xsd:string ;
+    ] ;
+  sh:targetObjectsOf <https://w3id.org/fog#asPly_v1.0-binaryLE> ;
+.
+:S19
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The RDF literal receiving a fog:asE57_v1.0 cannot have a xsd:string literal. Addresses SC-8."@en ;
+  rdfs:label "Geometry shape 19"@en ;
+  sh:message "The RDF literal receiving a fog:asE57_v1.0 cannot have a xsd:string literal. Addresses SC-8."@en ;
+  sh:not [
+      sh:datatype xsd:string ;
+    ] ;
+  sh:targetObjectsOf <https://w3id.org/fog#asE57_v1.0> ;
+.
+:S20
+  rdf:type sh:NodeShape ;
+  rdfs:comment "The RDF literal receiving a fog:asStep_ap214 can only have a xsd:string or xsd:anyURI literal. Addresses SC-8."@en ;
+  rdfs:label "Geometry shape 20"@en ;
+  sh:message "The RDF literal receiving a fog:asStep_ap214 can only have a xsd:string or xsd:anyURI literal. Addresses SC-8."@en ;
+  sh:or (
+      [
+        sh:datatype xsd:string ;
+      ]
+      [
+        sh:datatype xsd:anyURI ;
+      ]
+    ) ;
+  sh:targetObjectsOf fog:asStep_ap214 ;
+.

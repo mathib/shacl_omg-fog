@@ -1,0 +1,122 @@
+@prefix : <https://w3id.org/geometry/omg-fog#> .
+@prefix bot: <https://w3id.org/bot#> .
+@prefix dot: <https://w3id.org/dot#> .
+@prefix fog: <https://w3id.org/fog#> .
+@prefix omg: <https://w3id.org/omg#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix inst: <http://ex.org/data/> .
+
+# per shape constraint (SC) a set of correct triples (comply with all shapes related to the SC) and invalid triples per shape
+# classes and relations that are normally inferred are not asserted
+
+# building topology: building elements and zones
+inst:site1 a bot:Site ; 
+    bot:hasBuilding inst:building1 .
+inst:building1 bot:hasStorey inst:storey1 .
+inst:storey1 bot:hasSpace inst:space1 , inst:space2 .
+inst:space1 bot:containsElement inst:chair1 , inst:chair2 ;
+    bot:adjacentElement inst:door1 , inst:door2 .
+
+### Geometry and building objects that comply with all shapes
+inst:chair1 omg:hasGeometry inst:chair1-geom1 , inst:chair1-geom2 , inst:chair1-geom3 , inst:chair1-geom4 , inst:chair1-geom5 , inst:chair1-geom6 .
+inst:chair1-geom1 fog:asPly_v1.0-binaryLE "abc"^^xsd:base64Binary .
+inst:chair1-geom2 fog:asPly_v1.0-binaryLE "https://drive.org/file1.ply"^^xsd:anyURI .
+inst:chair1-geom3 fog:asE57_v1.0 "def"^^xsd:base64Binary .
+inst:chair1-geom4 fog:asE57_v1.0 "https://drive.org/file2.e57"^^xsd:anyURI .
+inst:chair1-geom5 fog:asStep_ap214 "some step geometry as a string" .
+inst:chair1-geom6 fog:asStep_ap214 "https://drive.org/file3.stp"^^xsd:anyURI .
+
+#-----------------------------------------------------
+# SC-1
+#-----------------------------------------------------
+### incorrect geometry: violates S1
+inst:door2 omg:hasGeometry inst:door2-geom1 . # no subproperty of omg:hasSimpleGeometryDescription/hasReferencedGeometryId/hasComplexGeometryDescription
+inst:door2 omg:hasGeometry "some geometry content" . # object of omg:hasGeometry is literal, thus no outgoing properties possible
+### incorrect geometry: violates S2
+inst:door2 omg:hasGeometry inst:door2-geom2 .
+inst:door2-geom2 omg:hasGeometryState inst:door2-geom2-state1 . # omg:hasGeometryState occurs (indicating L3)
+inst:door2-geom2-state1 a omg:CurrentGeometryState ;
+    fog:asE57_v1.0 "https://drive.org/file4.e57"^^xsd:anyURI .
+### incorrect geometry: violates S3 (propertyShapeForS3-S4-S5)
+inst:geomRandom1 fog:asE57_v1.0 "abcdef"^^xsd:base64Binary . # subproperty of omg:hasSimpleGeometryDescription without incoming omg:hasGeometry relation
+### incorrect geometry: violates S4 (propertyShapeForS3-S4-S5)
+inst:geomRandom2 fog:hasRevitId-element "12345678" . # subproperty of omg:hasReferencedGeometryId without incoming omg:hasGeometry relation
+### incorrect geometry: violates S5 (propertyShapeForS3-S4-S5)
+inst:geomRandom3 fog:asGeomOntology inst:geomRandom3-topnode . # subproperty of omg:hasComplexGeometryDescription without incoming omg:hasGeometry relation
+
+#-----------------------------------------------------
+# SC-2
+#-----------------------------------------------------
+### incorrect geometry: violates S6
+inst:chair2 omg:hasGeometry inst:chair2-geom1 .
+inst:chair2-geom1 fog:asGeomOntology inst:chair2-geom1-topnode . # subproperty of omg:hasComplexGeometryDescription (indicates approach 1 or 2)
+
+#-----------------------------------------------------
+# SC-3
+#-----------------------------------------------------
+### incorrect geometry: violates S7
+inst:site1 omg:hasGeometry inst:site1-geom1 .
+inst:site1-geom1 fog:asE57_v1.0 inst:site1-geom1-content . # object of fog subproperty of omg:hasSimpleGeometryDescription is no RDF literal
+### incorrect geometry: violates S8
+inst:storey1 omg:hasGeometry inst:storey1-geom1 .
+inst:storey1-geom1 fog:hasRevitId-element inst:storey1-geom1-content . # object of fog subproperty of omg:hasReferencedGeometryId is no RDF literal
+### incorrect geometry: violates S9
+inst:site1 omg:hasGeometry inst:site1-geom2 .
+inst:site1-geom2 fog:asE57_v1.0 "xyz"@en . # object of fog subproperty of omg:hasSimpleGeometryDescription has no correct datatype (no xsd:string/base64Binary/hexBinary/anyURI)
+### incorrect geometry: violates S10
+inst:storey1 omg:hasGeometry inst:storey1-geom2 .
+inst:storey1-geom2 fog:hasRevitId-element "987654"^^xsd:integer . # object of fog subproperty of omg:hasReferencedGeometryId has no correct datatype (no xsd:string)
+### incorrect geometry: violates S11
+inst:space1 omg:hasGeometry inst:space1-geom1 .
+inst:space1-geom1 fog:asGeomOntology "content of geometry" .
+
+#-----------------------------------------------------
+# SC-4
+#-----------------------------------------------------
+### incorrect geometry: violates S12
+inst:door1 omg:hasGeometry inst:door1-geom1 .
+inst:space1 omg:hasGeometry inst:door1-geom1 . # two different things point to the same omg:Geometry node via omg:hasGeometry
+
+#-----------------------------------------------------
+# SC-5
+#-----------------------------------------------------
+### incorrect geometry: violates S13 and S14
+inst:door1 omg:hasGeometry inst:door1-geom2 .
+inst:door1-geom2 fog:hasRevitId-element "12345678" ; # S14: subproperty of omg:hasReferencedGeometryId in dataset
+    omg:isPartOfGeometry inst:building1-allGeometry . # S13: omg:isPartOfGeometry in dataset
+inst:building1 omg:hasGeometry inst:building1-allGeometry .
+inst:building1-allGeometry fog:asRevit_v2020 "https://drive.org/file5.rvt"^^xsd:anyURI .
+
+#-----------------------------------------------------
+# SC-6
+#-----------------------------------------------------
+### incorrect geometry: violates S15
+# inst:chair1 has no geometry attached
+
+#-----------------------------------------------------
+# SC-7
+#-----------------------------------------------------
+### incorrect geometry: violates S16
+inst:door1 omg:hasGeometry inst:door1-geom3 .
+inst:door1-geom3 fog:asPly_v1.0-binaryLE "acegik"^^xsd:hexBinary . # xsd:hexBinary is not allowed for objects that have incoming subproperties of omg:hasSimpleGeometryDescription
+
+#-----------------------------------------------------
+# SC-8
+#-----------------------------------------------------
+### incorrect geometry: violates S17
+# inst:building1-allGeometry fog:asRevit_v2020 "https://drive.org/file5.rvt"^^xsd:anyURI . # fog:asRevit_v2020 is not a supported geometry format
+inst:door1 omg:hasGeometry inst:door1-geom4 .
+inst:door1-geom4 fog:asE57_v1.0 "https://drive.org/file6.e57"^^xsd:anyURI , "https://drive.org/file7.e57"^^xsd:anyURI . # a subject of a subproperty of omg:hasSimpleGeometryDescription can only have maximum one outgoing fog:asE57_v1.0 property
+### incorrect geometry: violates S18
+inst:door1 omg:hasGeometry inst:door1-geom5 .
+inst:door1-geom5 fog:asPly_v1.0-binaryLE "ply binary as text" . # a geometry node connected using the fog:asPly_v1.0-binaryLE property cannot point to a RDF literal with datatype xsd:string
+### incorrect geometry: violates S19
+inst:door1 omg:hasGeometry inst:door1-geom6 .
+inst:door1-geom6 fog:asE57_v1.0 "E57 binary as text" . # a geometry node connected using the fog:asE57_v1.0 property cannot point to a RDF literal with datatype xsd:string
+### incorrect geometry: violates S20
+inst:door1 omg:hasGeometry inst:door1-geom7 .
+inst:door1-geom7 fog:asStep_ap214 "STEP as a base64 encoded string"^^xsd:base64Binary . # a geometry node connected using the fog:asStep_ap214 property cannot point to a RDF literal with datatype xsd:base64Binary

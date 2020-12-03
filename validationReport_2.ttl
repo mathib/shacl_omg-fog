@@ -1,0 +1,322 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix : <http://api.stardog.com/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix stardog: <tag:stardog:api:> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+[
+    a sh:ValidationReport ;
+    sh:conforms false ;
+    sh:result [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S10> ;
+        sh:sourceConstraintComponent sh:DatatypeConstraintComponent ;
+        sh:focusNode <http://ex.org/data/storey1-geom1-content> ;
+        sh:value <http://ex.org/data/storey1-geom1-content> ;
+        sh:resultMessage "The node with an incoming omg:hasReferencedGeometryId property should have a valid datatype (xsd:string). Addresses SC-3."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S10> ;
+        sh:sourceConstraintComponent sh:DatatypeConstraintComponent ;
+        sh:focusNode 987654 ;
+        sh:value 987654 ;
+        sh:resultMessage "The node with an incoming omg:hasReferencedGeometryId property should have a valid datatype (xsd:string). Addresses SC-3."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S20> ;
+        sh:sourceConstraintComponent sh:OrConstraintComponent ;
+        sh:focusNode "STEP as a base64 encoded string"^^xsd:base64Binary ;
+        sh:value "STEP as a base64 encoded string"^^xsd:base64Binary ;
+        sh:resultMessage "The RDF literal receiving a fog:asStep_ap214 can only have a xsd:string or xsd:anyURI literal. Addresses SC-8."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S19> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode "E57 binary as text" ;
+        sh:value "E57 binary as text" ;
+        sh:resultMessage "The RDF literal receiving a fog:asE57_v1.0 cannot have a xsd:string literal. Addresses SC-8."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S1> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom1> ;
+        sh:value <http://ex.org/data/door1-geom1> ;
+        sh:resultMessage "A node with an incoming omg:hasGeometry property should have either an outgoing omg:hasSimpleGeometryDescription, omg:hasReferencedGeometryId or an omg:hasComplexGeometryDescription property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S1> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom1> ;
+        sh:value <http://ex.org/data/door1-geom1> ;
+        sh:resultMessage "A node with an incoming omg:hasGeometry property should have either an outgoing omg:hasSimpleGeometryDescription, omg:hasReferencedGeometryId or an omg:hasComplexGeometryDescription property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S1> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door2-geom1> ;
+        sh:value <http://ex.org/data/door2-geom1> ;
+        sh:resultMessage "A node with an incoming omg:hasGeometry property should have either an outgoing omg:hasSimpleGeometryDescription, omg:hasReferencedGeometryId or an omg:hasComplexGeometryDescription property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S1> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode "some geometry content" ;
+        sh:value "some geometry content" ;
+        sh:resultMessage "A node with an incoming omg:hasGeometry property should have either an outgoing omg:hasSimpleGeometryDescription, omg:hasReferencedGeometryId or an omg:hasComplexGeometryDescription property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S1> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door2-geom2> ;
+        sh:value <http://ex.org/data/door2-geom2> ;
+        sh:resultMessage "A node with an incoming omg:hasGeometry property should have either an outgoing omg:hasSimpleGeometryDescription, omg:hasReferencedGeometryId or an omg:hasComplexGeometryDescription property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S2> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door2-geom2-state1> ;
+        sh:value <http://ex.org/data/door2-geom2-state1> ;
+        sh:resultMessage "An omg:hasGeometryState property (used in L3 geometry patterns) should not occur in the dataset. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#subShapeS3> ;
+        sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door2-geom2-state1> ;
+        sh:resultPath [
+            sh:inversePath <https://w3id.org/omg#hasGeometry>
+        ] ;
+        sh:resultMessage "A node with an outgoing omg:hasSimpleGeometryDescription property should have an incoming omg:hasGeometry property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#subShapeS3> ;
+        sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+        sh:focusNode <http://ex.org/data/geomRandom1> ;
+        sh:resultPath [
+            sh:inversePath <https://w3id.org/omg#hasGeometry>
+        ] ;
+        sh:resultMessage "A node with an outgoing omg:hasSimpleGeometryDescription property should have an incoming omg:hasGeometry property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#subShapeS4> ;
+        sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+        sh:focusNode <http://ex.org/data/geomRandom2> ;
+        sh:resultPath [
+            sh:inversePath <https://w3id.org/omg#hasGeometry>
+        ] ;
+        sh:resultMessage "A node with an outgoing omg:hasReferencedGeometryId property should have an incoming omg:hasGeometry property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#subShapeS5> ;
+        sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+        sh:focusNode <http://ex.org/data/geomRandom3> ;
+        sh:resultPath [
+            sh:inversePath <https://w3id.org/omg#hasGeometry>
+        ] ;
+        sh:resultMessage "A node with an outgoing omg:hasComplexGeometryDescription property should have an incoming omg:hasGeometry property. Addresses SC-1."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S6> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/geomRandom3-topnode> ;
+        sh:value <http://ex.org/data/geomRandom3-topnode> ;
+        sh:resultMessage "An omg:hasComplexGeometryDescription property (used for approach 1 and 2) should not occur in the dataset. Addresses SC-2."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S6> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/chair2-geom1-topnode> ;
+        sh:value <http://ex.org/data/chair2-geom1-topnode> ;
+        sh:resultMessage "An omg:hasComplexGeometryDescription property (used for approach 1 and 2) should not occur in the dataset. Addresses SC-2."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S6> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode "content of geometry" ;
+        sh:value "content of geometry" ;
+        sh:resultMessage "An omg:hasComplexGeometryDescription property (used for approach 1 and 2) should not occur in the dataset. Addresses SC-2."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S7> ;
+        sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+        sh:focusNode <http://ex.org/data/site1-geom1-content> ;
+        sh:value <http://ex.org/data/site1-geom1-content> ;
+        sh:resultMessage "The node with an incoming omg:hasSimpleGeometryDescription property should be an RDF literal. Addresses SC-3."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#subShapeS12> ;
+        sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom1> ;
+        sh:resultPath [
+            sh:inversePath <https://w3id.org/omg#hasGeometry>
+        ] ;
+        sh:resultMessage "The node with an incoming omg:hasGeometry property should have maximum one incoming omg:hasGeometry property. In other words, a omg:Geometry node cannot be linked from multiple objects. Addresses SC-4."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#subShapeS12> ;
+        sh:sourceConstraintComponent sh:MaxCountConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom1> ;
+        sh:resultPath [
+            sh:inversePath <https://w3id.org/omg#hasGeometry>
+        ] ;
+        sh:resultMessage "The node with an incoming omg:hasGeometry property should have maximum one incoming omg:hasGeometry property. In other words, a omg:Geometry node cannot be linked from multiple objects. Addresses SC-4."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S8> ;
+        sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+        sh:focusNode <http://ex.org/data/storey1-geom1-content> ;
+        sh:value <http://ex.org/data/storey1-geom1-content> ;
+        sh:resultMessage "The node with an incoming omg:hasReferencedGeometryId property should be an RDF literal. Addresses SC-3."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S11> ;
+        sh:sourceConstraintComponent sh:NodeKindConstraintComponent ;
+        sh:focusNode "content of geometry" ;
+        sh:value "content of geometry" ;
+        sh:resultMessage "The node with an incoming omg:hasComplexGeometryDescription property should be a blank node or an IRI. Addresses SC-3."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S9> ;
+        sh:sourceConstraintComponent sh:OrConstraintComponent ;
+        sh:focusNode <http://ex.org/data/site1-geom1-content> ;
+        sh:value <http://ex.org/data/site1-geom1-content> ;
+        sh:resultMessage "The node with an incoming omg:hasSimpleGeometryDescription property should have a valid datatype (xsd:string, xsd:base64Binary, xsd:hexBinary, xsd:anyURI). Custom datatypes for other binary-to-text encoding schemes can be added in the future. Addresses SC-3."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S9> ;
+        sh:sourceConstraintComponent sh:OrConstraintComponent ;
+        sh:focusNode "xyz"@en ;
+        sh:value "xyz"@en ;
+        sh:resultMessage "The node with an incoming omg:hasSimpleGeometryDescription property should have a valid datatype (xsd:string, xsd:base64Binary, xsd:hexBinary, xsd:anyURI). Custom datatypes for other binary-to-text encoding schemes can be added in the future. Addresses SC-3."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S14> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/geomRandom2> ;
+        sh:value <http://ex.org/data/geomRandom2> ;
+        sh:resultMessage "An omg:hasReferencedGeometryId property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S14> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/storey1-geom1> ;
+        sh:value <http://ex.org/data/storey1-geom1> ;
+        sh:resultMessage "An omg:hasReferencedGeometryId property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S14> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/storey1-geom2> ;
+        sh:value <http://ex.org/data/storey1-geom2> ;
+        sh:resultMessage "An omg:hasReferencedGeometryId property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S14> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom2> ;
+        sh:value <http://ex.org/data/door1-geom2> ;
+        sh:resultMessage "An omg:hasReferencedGeometryId property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S13> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom2> ;
+        sh:value <http://ex.org/data/door1-geom2> ;
+        sh:resultMessage "An omg:isPartOfGometry property (geometry that is part of another geometry) should not occur in the dataset. Addresses SC-5."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S16> ;
+        sh:sourceConstraintComponent sh:OrConstraintComponent ;
+        sh:focusNode <http://ex.org/data/site1-geom1-content> ;
+        sh:value <http://ex.org/data/site1-geom1-content> ;
+        sh:resultMessage "The node with an incoming omg:hasSimpleGeometryDescription property should have a datatype equal to xsd:string, xsd:base64Binary or xsd:anyURI. Other binary-to-text encoding schemes are not supported by the application of the receiving stakeholder. Addresses SC-7."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S16> ;
+        sh:sourceConstraintComponent sh:OrConstraintComponent ;
+        sh:focusNode "xyz"@en ;
+        sh:value "xyz"@en ;
+        sh:resultMessage "The node with an incoming omg:hasSimpleGeometryDescription property should have a datatype equal to xsd:string, xsd:base64Binary or xsd:anyURI. Other binary-to-text encoding schemes are not supported by the application of the receiving stakeholder. Addresses SC-7."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S16> ;
+        sh:sourceConstraintComponent sh:OrConstraintComponent ;
+        sh:focusNode "acegik"^^xsd:hexBinary ;
+        sh:value "acegik"^^xsd:hexBinary ;
+        sh:resultMessage "The node with an incoming omg:hasSimpleGeometryDescription property should have a datatype equal to xsd:string, xsd:base64Binary or xsd:anyURI. Other binary-to-text encoding schemes are not supported by the application of the receiving stakeholder. Addresses SC-7."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S15> ;
+        sh:sourceConstraintComponent sh:MinCountConstraintComponent ;
+        sh:focusNode <http://ex.org/data/space2> ;
+        sh:resultPath <https://w3id.org/omg#hasGeometry> ;
+        sh:resultMessage "All bot:Element, bot:Zone and dot:Damage instances should have at least one outgoing omg:hasGeometry relation. Addresses SC-6."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S18> ;
+        sh:sourceConstraintComponent sh:NotConstraintComponent ;
+        sh:focusNode "ply binary as text" ;
+        sh:value "ply binary as text" ;
+        sh:resultMessage "The RDF literal receiving a fog:asPly_v1.0-binaryLE cannot have a xsd:string literal. Addresses SC-8."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S17> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode <http://ex.org/data/building1-allGeometry> ;
+        sh:value <http://ex.org/data/building1-allGeometry> ;
+        sh:resultMessage "The node with an outgoing omg:hasSimpleGeometryDescription property should also have a property equal to either fog:asPly_v1.0-binaryLE (binary geometry format), fog:asE57_v1.0 (binary geometry format) or fog:asStep_ap214 (text-based geometry format). Addresses SC-8."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S17> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom4> ;
+        sh:value <http://ex.org/data/door1-geom4> ;
+        sh:resultMessage "The node with an outgoing omg:hasSimpleGeometryDescription property should also have a property equal to either fog:asPly_v1.0-binaryLE (binary geometry format), fog:asE57_v1.0 (binary geometry format) or fog:asStep_ap214 (text-based geometry format). Addresses SC-8."@en
+    ] , [
+        a sh:ValidationResult ;
+        sh:resultSeverity sh:Violation ;
+        sh:sourceShape <https://w3id.org/geometry/omg-fog#S17> ;
+        sh:sourceConstraintComponent sh:XoneConstraintComponent ;
+        sh:focusNode <http://ex.org/data/door1-geom4> ;
+        sh:value <http://ex.org/data/door1-geom4> ;
+        sh:resultMessage "The node with an outgoing omg:hasSimpleGeometryDescription property should also have a property equal to either fog:asPly_v1.0-binaryLE (binary geometry format), fog:asE57_v1.0 (binary geometry format) or fog:asStep_ap214 (text-based geometry format). Addresses SC-8."@en
+    ]
+] .
